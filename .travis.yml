@@ -1,0 +1,31 @@
+sudo: required
+
+services:
+  - docker
+
+language: java
+dist: bionic
+
+jdk:
+  - openjdk11
+
+cache:
+  directories:
+    - $HOME/.m2
+
+branches:
+  only:
+    - master
+
+env:
+  - DOCKER_IMAGE=rso1920/video-streamer:1.0.0-SNAPSHOT-$TRAVIS_JOB_NUMBER
+
+script:
+  - mvn clean package -U
+  - docker build -t "$DOCKER_IMAGE" .
+  - docker tag rso1920/video-streamer:1.0.0-SNAPSHOT-$TRAVIS_JOB_NUMBER rso1920/video-streamer:latest
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push "$DOCKER_IMAGE"
+  - docker push rso1920/video-streamer:latest
