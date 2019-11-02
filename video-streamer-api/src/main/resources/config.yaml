@@ -1,0 +1,17 @@
+kumuluzee:
+  name: rso-catalog
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8084
+    http:
+      port: 8084
+  config:
+    start-retry-delay-ms: 500
+    max-retry-delay-ms: 900000
+    etcd:
+      hosts: http://localhost:2379
+
+rest-config:
+  file-storage-api-url: http://localhost:8080/
