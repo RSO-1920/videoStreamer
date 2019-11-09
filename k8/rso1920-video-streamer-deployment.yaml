@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rso1920-video-streamer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rso1920-video-streamer
+  template:
+    metadata:
+      labels:
+        app: rso1920-video-streamer
+    spec:
+      containers:
+        - image: rso1920/video-streamer:latest
+          name: rso1920-video-streamer
+          env:
+            - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+              value: http://etcd:2379
+            - name: KUMULUZEE_CONFIG_ETCD_HOSTS
+              value: http://etcd:2379
+            - name: KUMULUZEE_SERVER_BASEURL
+              value: http://localhost:8084
+          ports:
+            - containerPort: 8084
+              name: video-streamer
+              protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rso1920-video-streamer
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8084
+      protocol: TCP
+      targetPort: video-streamer
+  selector:
+    app: rso1920-video-streamer

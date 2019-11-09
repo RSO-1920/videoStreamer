@@ -1,5 +1,5 @@
 kumuluzee:
-  name: rso-catalog
+  name: rso1920-catalog
   env:
     name: dev
   version: 1.0.0
@@ -12,6 +12,11 @@ kumuluzee:
     max-retry-delay-ms: 900000
     etcd:
       hosts: http://localhost:2379
+  discovery:
+    etcd:
+      hosts: http://localhost:2379
+    ttl: 30
+    ping-interval: 5
 
 rest-config:
   file-storage-api-url: http://localhost:8080/
