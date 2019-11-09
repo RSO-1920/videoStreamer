@@ -1,5 +1,5 @@
 kumuluzee:
-  name: rso1920-catalog
+  name: rso1920-video-streamer
   env:
     name: dev
   version: 1.0.0
