@@ -51,11 +51,6 @@
 
             <dependency>
                 <groupId>com.kumuluz.ee.config</groupId>
-                <artifactId>kumuluzee-config-etcd</artifactId>
-                <version>${kumuluzee-config.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.kumuluz.ee.config</groupId>
                 <artifactId>kumuluzee-config-mp</artifactId>
                 <version>${kumuluzee-config-mp.version}</version>
             </dependency>
@@ -105,6 +100,12 @@
             <groupId>com.kumuluz.ee.discovery</groupId>
             <artifactId>kumuluzee-discovery-etcd</artifactId>
             <version>${kumuluzee-discovery.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.kumuluz.ee.config</groupId>
+            <artifactId>kumuluzee-config-etcd</artifactId>
+            <version>${kumuluzee-config.version}</version>
         </dependency>
 
 

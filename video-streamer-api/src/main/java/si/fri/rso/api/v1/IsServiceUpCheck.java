@@ -13,6 +13,7 @@ public class IsServiceUpCheck implements HealthCheck {
     @Override
     public HealthCheckResponse call() {
         VideoStreamerConfigProperties videoStreamerConfigProperties = CDI.current().select(VideoStreamerConfigProperties.class).get();
+        // System.out.println("health: " + videoStreamerConfigProperties.getIsServiceUp());
 
         if (videoStreamerConfigProperties.getIsServiceUp()) {
             return HealthCheckResponse
