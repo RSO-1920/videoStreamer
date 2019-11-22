@@ -1,8 +1,10 @@
 package si.fri.rso.api.v1.controllers;
 
+import si.fri.rso.config.VideoStreamerConfigProperties;
 import si.fri.rso.services.StreamBean;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
@@ -33,6 +35,7 @@ public class VideoStreamingController {
                 .build();
     }
 
+    // TODO GET FILE FROM file storage
 
     @GET
     @Path("/stream")

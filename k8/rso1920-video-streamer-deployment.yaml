@@ -26,6 +26,18 @@ spec:
             - containerPort: 8084
               name: video-streamer
               protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: video-streamer
+          initialDelaySeconds: 20
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: video-streamer
+          initialDelaySeconds: 20
+          periodSeconds: 3
 ---
 
 apiVersion: v1

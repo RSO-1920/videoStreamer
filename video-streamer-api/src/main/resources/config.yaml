@@ -17,6 +17,10 @@ kumuluzee:
       hosts: http://localhost:2379
     ttl: 30
     ping-interval: 5
+  health:
+    checks:
+      etcd-health-check:
+        connection-url: http://localhost:2379/health
 
 rest-config:
-  file-storage-api-url: http://localhost:8080/
+  is-service-up: true
