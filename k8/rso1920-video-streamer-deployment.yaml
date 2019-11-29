@@ -21,7 +21,7 @@ spec:
             - name: KUMULUZEE_CONFIG_ETCD_HOSTS
               value: http://etcd:2379
             - name: KUMULUZEE_SERVER_BASEURL
-              value: http://10.28.9.153:8084
+              value: http://10.28.4.119:8084
             - name: KUMULUZEE_HEALTH_CHECKS_ETCDHEALTHCHECK_CONNECTIONURL
               value: http://etcd:2379/health
           ports:
