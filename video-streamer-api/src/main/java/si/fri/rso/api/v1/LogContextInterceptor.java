@@ -1,4 +1,4 @@
-package si.fri.rso.api.v1.interceptors;
+package si.fri.rso.api.v1;
 import com.kumuluz.ee.common.config.EeConfig;
 import com.kumuluz.ee.common.runtime.EeRuntime;
 import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
@@ -11,15 +11,14 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import java.util.HashMap;
 import java.util.UUID;
-/*
+
 @Log
 @Interceptor
 @Priority(Interceptor.Priority.PLATFORM_BEFORE)
 public class LogContextInterceptor {
+
     @AroundInvoke
     public Object logMethodEntryAndExit(InvocationContext context) throws Exception {
-
-
 
         ConfigurationUtil configurationUtil = ConfigurationUtil.getInstance();
 
@@ -30,11 +29,13 @@ public class LogContextInterceptor {
         settings.put("applicationVersion", EeConfig.getInstance().getVersion());
         settings.put("uniqueInstanceId", EeRuntime.getInstance().getInstanceId());
 
-        // settings.put("uniqueRequestId", UUID.randomUUID().toString());
+        settings.put("uniqueRequestId", UUID.randomUUID().toString());
+
+        System.out.println("INTERCEPTOR");
 
         try (final CloseableThreadContext.Instance ctc = CloseableThreadContext.putAll(settings)) {
             Object result = context.proceed();
             return result;
         }
     }
-}*/
+}
