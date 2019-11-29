@@ -6,9 +6,11 @@ import com.kumuluz.ee.logs.cdi.Log;
 import org.apache.logging.log4j.CloseableThreadContext;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -16,11 +18,18 @@ import java.util.UUID;
 @Interceptor
 @Priority(Interceptor.Priority.PLATFORM_BEFORE)
 public class LogContextInterceptor {
+    @Inject
+    HttpServletRequest request;
 
     @AroundInvoke
     public Object logMethodEntryAndExit(InvocationContext context) throws Exception {
 
         ConfigurationUtil configurationUtil = ConfigurationUtil.getInstance();
+        System.out.println("NEEEEEEEEE");
+
+        String uniqueRequestId = request.getHeader("uniqueRequestId");
+
+
 
         HashMap settings = new HashMap();
 
@@ -29,9 +38,9 @@ public class LogContextInterceptor {
         settings.put("applicationVersion", EeConfig.getInstance().getVersion());
         settings.put("uniqueInstanceId", EeRuntime.getInstance().getInstanceId());
 
-        settings.put("uniqueRequestId", UUID.randomUUID().toString());
+        settings.put("uniqueRequestId", uniqueRequestId != null ? uniqueRequestId : UUID.randomUUID().toString());
 
-        System.out.println("INTERCEPTOR");
+        System.out.println("uniqueRequestId: " + settings.get("uniqueRequestId"));
 
         try (final CloseableThreadContext.Instance ctc = CloseableThreadContext.putAll(settings)) {
             Object result = context.proceed();

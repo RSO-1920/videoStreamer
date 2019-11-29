@@ -14,6 +14,7 @@ import si.fri.rso.services.StreamBean;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Context;
@@ -34,8 +35,8 @@ public class VideoStreamingController {
     @Inject
     StreamBean streamBean;
 
-    @Context
-    ContainerRequestContext reqContext;
+    @Inject
+    HttpServletRequest requestheader;
 
     @Inject
     @Metric(name = "histogram_streaming")
@@ -49,7 +50,7 @@ public class VideoStreamingController {
         File file = new File(FILE_PATH);
         LOG.info("Inside head method");
 
-        System.out.println("req context property: " + reqContext.getProperty("uniqueRequestId"));
+        // System.out.println("header: " + requestheader.getHeader("uniqueRequestId"));
 
         return Response.ok()
                 .status(Response.Status.PARTIAL_CONTENT)

@@ -32,13 +32,13 @@ spec:
             httpGet:
               path: /health/live
               port: video-streamer
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /health/ready
               port: video-streamer
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 3
 ---
 
