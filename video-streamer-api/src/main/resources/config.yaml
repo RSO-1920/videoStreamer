@@ -48,3 +48,4 @@ kumuluzee:
 
 rest-config:
   is-service-up: true
+  catalog-uri: /v1/fileMetadata
