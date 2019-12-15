@@ -2,6 +2,10 @@ package si.fri.rso.api.v1.controllers;
 
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.kumuluz.ee.logs.cdi.Log;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +19,7 @@ import si.fri.rso.config.VideoStreamerConfigProperties;
 import si.fri.rso.lib.CatalogFileMetadata;
 import si.fri.rso.services.RequestSenderBean;
 import si.fri.rso.services.StreamBean;
+import si.fri.rso.services.classes.MediaStreamer;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -67,6 +72,12 @@ public class VideoStreamingController {
     }
 
     @DELETE
+    @Operation(description = "Delete streamed files", summary = "file deletion", tags = "delete, stream", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "delete streamed files",
+                    content = @Content( schema = @Schema(implementation = String.class))
+            ),
+    })
     @Path("/stream")
     public  Response deleteStreamedFiles() throws IOException {
         FileUtils.cleanDirectory(new File("./streamFiles/"));
@@ -75,6 +86,11 @@ public class VideoStreamingController {
     }
 
     @HEAD
+    @Operation(description = "Head request for streams", summary = "head", tags = "head, stream", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "stream head request"
+            ),
+    })
     @Counted(name = "stream_header")
     @Path("/stream/{fileId}")
     @Produces("video/mp4")
@@ -89,6 +105,12 @@ public class VideoStreamingController {
     }
 
     @GET
+    @Operation(description = "Video stream", summary = "Video stream", tags = "stream, video", responses = {
+            @ApiResponse(responseCode = "200",
+                    description = "stream video",
+                    content = @Content( schema = @Schema(implementation = MediaStreamer.class))
+            ),
+    })
     @Metered(name = "streaming_metered")
     @Timed(name = "streaming_times")
     @Path("/stream/{fileId}")
