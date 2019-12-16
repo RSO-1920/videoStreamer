@@ -134,8 +134,9 @@ public class VideoStreamingController {
         String fileName = catalogFileMetadata.getFileName();
 
         System.out.println(bucketName + " " + fileName);
-
+        System.out.println(fileStorageUrl);
         if (!fileStorageUrl.isPresent()) {
+            System.out.println("INSIDE");
             file = new File(FILE_PATH);
             histogram.update(file.length());
             return this.streamBean.buildStream(file, range);
