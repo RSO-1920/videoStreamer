@@ -19,5 +19,5 @@ http://<ip>:8084/v1/stream
 http://localhost:8084/api-specs/v1/openapi.json
 ```
 ```
-http://localhost:8084/api-specs/ui/?url=http://localhost:8089/api-specs/v1/openapi.json
+http://localhost:8084/api-specs/ui
 ```
